@@ -1,26 +1,40 @@
-package com.example.android.newsapp;
+package com.example.android.newsapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.newsapp.Models.NewsItem;
+import com.example.android.newsapp.Models.NewsItemViewModel;
+import com.example.android.newsapp.R;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsViewHolder>{
-    Context mContext;
-    public ArrayList<NewsItem>  mNewsList;
+public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsViewHolder> {
 
-    public NewsRecyclerViewAdapter(Context context, ArrayList<NewsItem> newsList) {
+    static Context mContext;
+    public static List<NewsItem> mNewsList;
+
+    public void setNewsList(List<NewsItem> newsItems) {
+        this.mNewsList = newsItems;
+        notifyDataSetChanged();
+    }
+
+    public NewsRecyclerViewAdapter(Context context, List<NewsItem> newsList) {
         this.mContext = context;
         this.mNewsList = newsList;
     }
 
+//    public NewsRecyclerViewAdapter(Context context, NewsItemViewModel viewModel) {
+//        this.mContext = context;
+//        this.mViewModel = viewModel;
+//    }
 
     @Override
     public NewsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -31,6 +45,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         View view = inflater.inflate(R.layout.news_item, viewGroup, shouldAttachToParentImmediately);
         NewsViewHolder newsViewHolder = new NewsViewHolder(view);
         return newsViewHolder;
+
     }
 
     @Override
@@ -40,10 +55,20 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
 
     @Override
     public int getItemCount() {
-        return mNewsList.size();
+        if (mNewsList != null)
+            return mNewsList.size();
+        else
+            return 0;
     }
 
-    public class NewsViewHolder extends RecyclerView.ViewHolder{
+
+
+//    public List<NewsItem> getNewsList()
+//    {return mNewsList;
+//    }
+
+
+    public static class NewsViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         TextView description;
         TextView date;
@@ -70,6 +95,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
                     mContext.startActivity(intent);
                 }
             });
+
         }
     }
 

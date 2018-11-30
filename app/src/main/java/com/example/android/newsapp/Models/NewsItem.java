@@ -1,18 +1,32 @@
-package com.example.android.newsapp;
+package com.example.android.newsapp.Models;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(tableName = "news_item")
 public class NewsItem {
+    @PrimaryKey(autoGenerate = true)
+    private int primary_key;
 
-    private String author;
+    @ColumnInfo(name = "title")
     private String title;
+
+    @ColumnInfo(name = "description")
     private String description;
+
+    @ColumnInfo(name = "url")
     private String url;
-    private String urlToImage;
+
+    @ColumnInfo(name = "date")
     private String publishedAt;
 
-    public NewsItem() {
 
-    }
+    private String author;
+    private String urlToImage;
 
+    @Ignore
     public NewsItem(String title, String description, String url, String publishedAt) {
         this.title = title;
         this.description = description;
@@ -20,14 +34,30 @@ public class NewsItem {
         this.publishedAt = publishedAt;
     }
 
-    public NewsItem(String author, String title, String description, String url, String urlToImage, String publishedAt) {
-        this.author = author;
+    public NewsItem(int primary_key, String title, String description, String url, String publishedAt) {
+        this.primary_key = primary_key+1;
         this.title = title;
         this.description = description;
         this.url = url;
-        this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
     }
+//    public NewsItem(String author, String title, String description, String url, String urlToImage, String publishedAt) {
+//        this.author = author;
+//        this.title = title;
+//        this.description = description;
+//        this.url = url;
+//        this.urlToImage = urlToImage;
+//        this.publishedAt = publishedAt;
+//    }
+
+    public int getPrimary_key() {
+        return primary_key;
+    }
+
+    public void setPrimary_key(int primary_key) {
+        this.primary_key = primary_key;
+    }
+
 
     public String getAuthor() {
         return author;

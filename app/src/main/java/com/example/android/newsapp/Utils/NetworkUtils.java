@@ -1,4 +1,4 @@
-package com.example.android.newsapp;
+package com.example.android.newsapp.Utils;
 
 import android.net.Uri;
 import java.io.IOException;

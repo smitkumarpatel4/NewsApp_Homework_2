@@ -1,6 +1,6 @@
-package com.example.android.newsapp;
+package com.example.android.newsapp.Utils;
 
-import com.example.android.newsapp.NewsItem;
+import com.example.android.newsapp.Models.NewsItem;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
